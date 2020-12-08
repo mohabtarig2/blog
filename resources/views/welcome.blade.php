@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>@yield('title','home')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,14 +81,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                   Amb Delaer 
                 </div>
                 {{--{{$obj->name}} --{{$obj->id}}--}}
 
-                @if($name=="ahmed")
-                <p> yes this {{$name}} </p>
-             
-                @endif
+                
             </div>
         </div>
     </body>

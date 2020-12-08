@@ -2388,8 +2388,7 @@ ul.icons {
       padding: 2rem 0 0.1rem 0 ; } }
 
 /* Header */
-body {
-  padding-top: 3.25rem; }
+
   body:before {
     content: ' ';
     background-image: url(../../images/bg.jpg);
@@ -2424,7 +2423,6 @@ body {
   height: 3.25rem;
   left: 0;
   line-height: 3.25rem;
-  position: fixed;
   top: 0;
   width: 100%;
   z-index: 10001; }

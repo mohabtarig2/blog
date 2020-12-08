@@ -2,7 +2,8 @@
 
 return[
 
-    "welcome" => "hello people "
+    "welcome" => "hello people ",
+    "login with apple" => "login with apple "
     
 ];
 
