@@ -17,6 +17,7 @@
 		<meta name="description" content="" />
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
   <link rel="stylesheet" href="{{URL::asset('assets/css/chocolat.css')}}" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -30,7 +31,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -44,45 +45,46 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/file.css')}}" />
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light .bg-transparent shadow-sm" style="
- 
-    overflow: hidden;
-    position: absolute;
-    width: 100%;
-    margin: 0px;
-   
-    background: transparent;">
-            <div class="container">
+    <div id="ap">
+        <nav class="navbar navbar-expand-md navbar-light   bg-transparent shadow-sm " >
+
                 <a class="navbar-brand" href="{{ url('/') }}">
 				   <!-- {{ config('app.name', 'Home') }} -->
-				  <h3 class="text-light">AMB DELAER</h3>
+                  <h3 class="text-light">AMB DELAER</h3>
+
+
+
                 </a>
                 <button class="navbar-toggler" STYLE="box-shadow: none;border-style: none;
                 border-color:none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                 
+
                     <svg xmlns="http://www.w3.org/2000/svg" class="navbar-toggler-icon" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
                         <image id="icons8_menu_48px" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAAdUlEQVRYCe3WIQ7AIAwFUJjh/sdFsSABR5au4pEgaAItT/1SLAIECBAgQOA/gbq3Hr2PvZbpXFtbZn4yDXcziw/cqLlDgAABAgS+ElhyxXxUFpoKgVsWCsTWigABAgQIHAKy0EESXJCFgsG1I0CAAAECBFIJvO5zDBa02sLSAAAAAElFTkSuQmCC"/>
                       </svg>
-                      
+
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
 
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li class="nav-item">
+                            <a class="nav-link text-light" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                    @endforeach
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link btn-orange text-center mb-1 text-light round" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link  text-center mb-1 text-light round" href="{{ route('auth.login') }}">{{ __('messages.login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link  btn  btn-dark text-light round" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link  text-light round" href="{{ route('register') }}">{{ __('messages.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -106,7 +108,7 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
+
         </nav>
 
         <main class="py-4">

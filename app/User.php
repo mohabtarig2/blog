@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable ;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','mobile'
+        'name', 'email', 'password','mobile','expire','age'
     ];
 
     /**
@@ -31,9 +32,22 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * The attributes that should be cast to native types.
      *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-}
+     *
+            */
+
+
+            protected  $guard  ="admin";
+
+
+
+           ############################  start relations ############################
+
+           public function phone(){
+               return $this->hasOne('App\Models\Phone','user_id');
+           }
+
+
+           ############################  end relations ############################
+
+
+       }

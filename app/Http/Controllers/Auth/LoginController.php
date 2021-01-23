@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request as HttpRequest;
 
 class LoginController extends Controller
 {
@@ -37,12 +39,33 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+       protected function authenticated(Request $request , $user)
+        {
+            $token = $user->createToken('token-name');
+
+            return $token->plainTextToken;
+                if($request->isXmlHttpRequest()){
+                   // return response(null,204);
+                    return $user;
+                }
+        }
+
+
     public function username()
     {
-        $value = request() -> input('identify');
-        $filed = filter_var($value,FILTER_VALIDATE_EMAIL) ?  'email' : 'mobile';
+       $value = request() -> input('identify');
+       $filed = filter_var($value,FILTER_VALIDATE_EMAIL) ?  'email' : 'mobile';
         request()->merge([$filed => $value]);
         return $filed;
 
     }
+
+    protected function loggedOut(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            return response(null, 204);
+        }
+    }
+
 }

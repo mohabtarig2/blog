@@ -1,3 +1,4 @@
+<div class="profle-businress">
 @extends('layouts.app')
 
 @section('content')
@@ -7,8 +8,8 @@
 
 
 
-  
-    <div class="profile-img" >
+
+    <div class="profile-img mt-3" >
       <div class="container">
     <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto d-block mt-3 " xmlns:xlink="http://www.w3.org/1999/xlink" width="166.521" height="166.521" viewBox="0 0 166.521 166.521">
         <defs>
@@ -20,92 +21,140 @@
       </svg>
     </div>
 
-    <h2 class="text-center mt-2"> Mohab tarig</h2>
 
-    
+
+<div class="text-center">
+    <h2 class=" mt-2"> Mohab tarig</h2>
+
+    <a class="text-center text-light btn btn-blue rounded" href="{{url('review')}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 64 64"><g class="nc-icon-wrapper" fill="#ffffff"><path fill="#ffffff" d="M61.707,2.293c-0.273-0.275-0.683-0.365-1.048-0.233l-58,21c-0.378,0.137-0.638,0.488-0.658,0.89 c-0.02,0.402,0.203,0.777,0.566,0.952l20.886,10.025l18.866-13.945c0.462-0.341,1.041,0.238,0.699,0.699L29.074,40.547 l10.025,20.886C39.266,61.78,39.617,62,40,62c0.017,0,0.033,0,0.05-0.001c0.402-0.021,0.753-0.28,0.891-0.658l21-58 C62.072,2.976,61.981,2.567,61.707,2.293z"/></g></svg>
+        Message
+     </a>
+     <a class="text-center text-light btn btn-dark rounded" href="{{url('review')}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 64 64"><g class="nc-icon-wrapper" fill="#ffffff"><path fill="#ffffff" d="M50.003,63C22.982,63.001,0.999,41.018,1,13.997c0-0.263,0.107-0.518,0.293-0.704L10.586,4 c0.781-0.781,2.047-0.781,2.828,0L26,16.586c0.781,0.781,0.781,2.047,0,2.828L17.414,28L36,46.586L44.586,38 c0.781-0.781,2.047-0.781,2.828,0L60,50.586c0.781,0.781,0.781,2.047,0,2.828l-9.293,9.293C50.521,62.893,50.266,63,50.003,63z"/></g></svg>
+        contact us
+     </a>
+</div>
+</div>
+<div class="card mt-3">
+
+    <div class="card-header">
+        <div class="container">
+        <ul class="nav nav-tabs card-header-tabs">
+
+          <li class="nav-item">
+            <a class="nav-link active text-dark" href="#">
+                <img src="{{asset('assets/icons/profile-icon.png')}}" width="20">
+               <span class="visible"> Profile-company</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark " href="{{url('business-board')}}">
+                <img src="{{asset('assets/icons/store.png')}}" width="20">
+               <span class="visible"> Our sevices</span></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="{{url('review')}}">
+                <img src="{{asset('assets/icons/review.png')}}" width="20">
+                <span class="visible">review</span></a>
+
+          </li>
+
+
+
+
+        </ul>
+    </div>
+      </div>
+
 </div>
 
 
 <div class="container">
-    
-            <h1 class="text-center">Dashboard</h1>
-            
-            <div class="form-group row">
-                <div class="col-md-4">
-                  
+
+
+
+            <div class="form-group row mt-5">
+
+                <div class="col-md-7 ">
+                    <div class="card text-center">
+
+                      <div class="card-body ">
+
+          <h2 class="text-left text-primary">description </h2>
+          <p class="text-muted text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore natus vero magni,
+             temporibus neque nisi ipsa corrupti quos veritatis, error deserunt, maxime ut molestiae nam! Harum ipsam atque tempora alias.
+          </p>
+
+
+
+
+
+
+
+              </div>
+          </div>
+      </div>
+                <div class="col-md-5">
+
                   <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Messages
-                      <span class="badge badge-danger badge-pill">14</span>
+
+                        Ratings
+
+                        <div  class="badge badge-dark text ml-3 pt-2 pb-2 pl-2 pr-2">7.55%</div>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                     Notfications
-                     
+                    <li class="list-group-item d-flex  text-dark justify-content-between align-items-center">
+                        Project completion rate
+                        <div  class="badge badge-dark text ml-3 pt-2 pb-2 pl-2 pr-2">7.55%</div>
+
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex text-dark justify-content-between align-items-center">
                       <a href="{{url('account')}}" class="text-dark">
                         Settings
                  </a>
-                     
-                      
+
+
                     </li>
+
+                </li>
+                <li class="list-group-item d-flex text-dark justify-content-between align-items-center">
+                  <a href="{{url('account')}}" class="text-dark">
+                    Completed projects
+
+             </a>
+
+
+                </li>
+                <li class="list-group-item d-flex text-dark justify-content-between align-items-center">
+                    <a href="{{url('account')}}" class="text-dark">
+                        Average response speed
+                        <span  class=" ml-5 ">
+                            3 hours and 39 minutes
+                        </span>
+               </a>
+
+
+                  </li>
+
+
+
+
                   </ul>
 
                     </li>
-                   
+
                   </ul>
                 </div>
-                <div class="col-md-8">
-                  <div class="card text-center">
-                    <div class="card-header">
-                      <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#">Profile-company</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link " href="{{url('business-board')}}">Add New Offer</a>
-                        </li>
 
-                        <li class="nav-item">
-                          <a class="nav-link " href="{{url('review')}}">review</a>
-                        </li>
-                        
-                        
-                        
-                      </ul>
-                    </div>
-                    <div class="card-body">
-                    
-        <h1 class="text-left text-o">description </h1>
-        <p class="text-muted text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore natus vero magni,
-           temporibus neque nisi ipsa corrupti quos veritatis, error deserunt, maxime ut molestiae nam! Harum ipsam atque tempora alias.
-        </p>
-        <hr>
-
-        <h1 class="text-left text-o">City </h1>
-        <p class="text-muted text-left">Dubai
-        </p>
-        <hr>
-
-        <h1 class="text-left text-o">Phone umber </h1>
-        <p class="text-muted text-left">+971568951040
-        </p>
-        <hr>
-        
-      
-        
-        
-            </div>
-        </div>      
-    </div>
 
   </div>
 
                     </div>
-               
 
 
-    
+
+
 
 
 

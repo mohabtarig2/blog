@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-orange shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-blue shadow-sm none-abs ">
             <div class="container">
                 <a class=" text-light navbar-brand" href="{{ url('/') }}">
                    AMB DELAER
@@ -42,11 +42,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link btn btn-light text-dark mr-3 round" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link  text-light mr-3 " href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -72,11 +72,13 @@
                 </div>
             </div>
         </nav>
-        
+
 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    @yield('scripts')
 </body>
 </html>

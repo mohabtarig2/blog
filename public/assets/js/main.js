@@ -8,7 +8,7 @@
 	var	$window = $(window),
 		$banner = $('#banner'),
 		$body = $('body');
-
+		
 	// Breakpoints.
 		breakpoints({
 			default:   ['1681px',   null       ],
