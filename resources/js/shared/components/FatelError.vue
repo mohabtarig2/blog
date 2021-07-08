@@ -5,7 +5,11 @@
     <h2>Unfortunately we cannot proceed</h2>
   </div>
 </template>
+<script>
+export default {
 
+}
+</script>
 <style scoped>
 .error {
   color: #999;

@@ -80,7 +80,7 @@ class RealatioController extends Controller
         public function doctors($hospital_id)
         {
            $hospitals =  Hospital::find($hospital_id);
-
+//
            $doctors = $hospitals->doctors;
            return view('doctors.doctors',compact('doctors'));
         }

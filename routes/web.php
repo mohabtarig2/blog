@@ -1,6 +1,9 @@
 <?php
 
-
+use App\CompanyFile;
+use App\CompanyFiles;
+use App\models\companies;
+use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,25 +24,109 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 Auth::routes();
 
-Route::middleware('auth')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth')->post('test','OfferController@test');
+Route::middleware('auth:sanctum')->get('/token', function (Request $request) {
+    $id =  $request->user()->id;
+    $user = User::find($id);
+    $token= $user->createToken('my-app-web');
+    return response()->json($token);
+
+
+
+
+
 });
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+    $id =  $request->user()->id;
+
+
+
+    $user = User::with('roles','company','companyfile','achivementFile')->find($id);
+            $user->makeVisible(['user_id']);
+            $token= $user->createToken('my-app-web');
+
+            return response()->json($user);
+
+    });
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/getUnreadNotificatons',"UserController@getUnreadNotificatons");
+        Route::get('getAllNotificatons',"UserController@getAllNotificatons");
+        Route::get('getLastTenNotifications',"UserController@getLastTenNotifications");
+        Route::put('NotificatonsMarkAsRead',"UserController@NotificatonsMarkAsRead");
+
+
+    });
+
+Route::post('/bregister','BRegisterController@bcreate');
+Route::get('/partner',function(){
+    return view('partner');
+})->name('partner');
+
+Route::get('/company/complete',function(Request $request){
+    $userid = $request->user()->id;
+    return $userid;
+    $available = companies::all()->where('user_id', '=', $userid);
+
+    return response()->json($available);
+});
+Route::get('/company/Files',function(Request $request){
+
+    $available = CompanyFile::all();
+    return response()->json($available);
+});
+
+
+Route::post('complete','CompleteContoller@complete');
+
+
+
+
+
+
+
+
+Route::group(['middleware' => 'admins'], function () {
+
+    Route::get('/consulte', function (Request $request) {
+        return view('consulte');
+    })->name('consulte');
+ });
+
+
+
+
+Route::post('co/login','auth\CompnayController@checkAdminLogin');
+
+
 Route::get('/', function () {
     return view('index');
 });
 
-Route::get('sign/{any?}', function () {
+
+/*Route::get('home/{any?}', function () {
     return view('test');
-})->where('any', '^(?!api\/)[\/\w\.-]*')->name('auth.login');
-
-
+})->where('any', '^(?!api\/)[\/\w\.-]*');
+*/
 
 //Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
 
 auth::routes(['verify'=>true]);
-Route::get('/home', 'HomeController@index')->name('home')->middleware("verified");
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::view('/','index');
+
+//constructionController
+Route::post('tconstr','constructionController@tender');
+Route::get('/AllTenderConsr' ,'constructionController@AllTenderConsr')->middleware('consr');
+Route::post('/insertOffer' ,'constructionController@insertOffer')->middleware('consr');
+Route::get('showConsrTender/{id}','constructionController@showTenders');
+Route::post('UpdateTenderConstruction','constructionController@UpdateTenderConstruction');
+
+
+
 
 Route::view('landing','landing');
 
@@ -60,12 +147,39 @@ Route::view('review','review');
 Route::view('b-dashboard','b-dashboard');
 
 
-Route::get('/dashboard',function(){
+/*/Route::get('/dashboard',function(){
     return 'not adult';
-})->name('not.adult');
+})->name('not.adult');*/
 Route::view('password','password');
 
 Route::post('/upload','UploadController@handle');
+
+Route::post('/licencefile','FUploadController@LicenceUpload');
+Route::post('/Achivementfile','FUploadController@AchivementUpload');
+
+
+
+
+Route::post('tenders' ,'TenderController@insert_consl');
+Route::get('/AllMyTenders' ,'TenderController@AllMyCtender');
+
+Route::get('/AllTenderConsulte' ,'TenderController@AllTenderConsulte')->middleware('consulte');
+Route::get('/CountCtender' ,'TenderController@CountCtender');
+Route::get('mytenders/ConslTender/{id}' ,'TenderController@ctender');
+Route::get('mytenders/commentTender/{id}' ,'TenderController@commentctender');
+Route::get('mytenders/CountcComment/{id}' ,'TenderController@CountcComment');
+Route::get('mytenders/MyofferIsset/{id}' ,'TenderController@MyofferIsset');
+Route::get('send' ,'TenderController@send');
+
+
+Route::get('/mytenders/MyOffer/{id}' ,'OfferController@myoffer');
+
+
+Route::post('/offer_consulte','OfferController@cons_offer');
+
+
+
+
 
 
 Route::get("/redirect/{service}","SocialController@redirct");
@@ -100,9 +214,7 @@ Route::post('rigesterBusiness','CurdController@rigesterBusiness')->name('rigeste
     Route::get('all','CurdController@getAllOffer')->name('offers.All');
 });
 
-Route::group(['namespace' => 'Auth','middleware' => 'checkAge'], function () {
-    Route::get('adualt','CustomController@adualt')->name('adualt');
-    });
+
 
     Route::get('/profile', 'HomeController@profile')->name('profile');
     //Route::resource('userprofile', 'UserprofileController');
@@ -121,34 +233,9 @@ Route::group(['namespace' => 'Auth','middleware' => 'checkAge'], function () {
         });
 
 
-Route::get('youtube','CurdController@getVideo');
 
 
-Route::group(['prefix' => 'ajax-offer'], function () {
-    Route::get('create','OfferController@create');
-    Route::post('store','OfferController@store')->name('ajax.offer.store');
-});
 
-Route::get('has-one','relation\RealatioController@hasOne');
-Route::get('has-one-reverse','relation\RealatioController@has_One');
-Route::get('has-user-has-phone','relation\RealatioController@getUserHasPhone');
-Route::get('has-user-no-has-phone','relation\RealatioController@getUserNoHasPhone');
-Route::get('get-user-phone-condition','relation\RealatioController@getUserWhereHasPhoneWithCondition');
-
-Route::get('hospital-has-many','relation\RealatioController@getHopitalDoctors');
-Route::get('hospitals', 'relation\RealatioController@hospitals');
-Route::get('doctors/{hospital_id}', 'relation\RealatioController@doctors');
-Route::get('has-doctor', 'relation\RealatioController@HospitalsHasDoctors');
-Route::get('has-male-doctor', 'relation\RealatioController@HospitalsHaMaleDoctors');
-Route::get('HospitalsNoHasDoctors', 'relation\RealatioController@HospitalsNoHasDoctors');
-Route::get('hospitals/{hospital_id}', 'relation\RealatioController@DeleteHospital')->name('hospital.delete');
-
-Route::get('doctors-services', 'relation\RealatioController@getDoctorService');
-Route::get('doctors/services/{doctor_id}', 'relation\RealatioController@getDoctorServicesById')->name('doctor.service');
-Route::post('saveServices-to-doctor', 'relation\RealatioController@SaveServicesToDoctor')->name('save.doctor.service');
-
-
-Route::get('service-doctor', 'relation\RealatioController@getServiceDoctor');
 
 Route::get('test1',function(){
 return view('test1');
@@ -156,10 +243,26 @@ return view('test1');
 
 
 
+///admin.php
 
 
-
-
-
+Route::get('countAll','adminController@countAll');
+Route::get('admin/detailsTenderConsulte','adminController@detailsTenderConsulte');
+Route::get('admin/detailsTenderConsr','adminController@detailsTenderConsr');
+Route::get('admin/ConsrTenders/{id}','adminController@ConsrTender');
+Route::get('admin/ConslTender/{id}','adminController@ConslTender');
+Route::get('admin/accept/{id}','adminController@acceptTender');
 
 ////auth
+
+// company Files
+
+
+Route::get('gatdatacompany','CompnayController@getData');
+Route::post('savedatacompany','CompnayController@savedatacompany');
+
+
+
+//payment methods
+
+Route::post('paymentOffer','PaymentController@paymentOffer');

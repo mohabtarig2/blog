@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+Broadcast::channel('newComment.{tender_id}', function ($user, $tender_id) {
+    return true;
+});
+
+Broadcast::channel('newTender.{tender_id}', function ($user, $tender_id) {
+    return true;
+});
+
+Broadcast::channel('AcceptTender.{tender_id}', function ($user, $tender_id) {
+    return true;
+});
+Broadcast::channel('commentConsr.{construction_id}', function ($user, $construction_id) {
+    return true;
+});

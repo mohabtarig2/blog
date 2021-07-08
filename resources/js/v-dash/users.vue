@@ -1,8 +1,14 @@
 <template>
     <div>
 
- <span>hello , {{name}}</span>
- <p>{{email}}</p>
+ <span>{{name}}</span>
+
+
+ <small>{{email}}</small>
+
+
+
+ <small>{{id}}</small>
 
 
 
@@ -13,8 +19,13 @@
 
 <script>
 export default {
-     props:{name:String,email:String} ,
+     props:{name:String,email:String,id:Number} ,
 
     //props:["title",'content']
 };
 </script>
+<style  scoped>
+small{
+    font-size:10px;
+}
+</style>

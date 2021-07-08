@@ -25,19 +25,62 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.withCredentials = true;
 
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
 
-// import Echo from 'laravel-echo';
+let token = document.head.querySelector('meta[name="csrf-token"]');
 
-// window.Pusher = require('pusher-js');
+/*
+if (token) {
+    window.axios.defaults.headers.common['x-csrf-token'] = token.conten;
+} else {
+        console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+*/
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+
+
+
+
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+
+
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+  key: "53cd15c14c320fa1a499",
+  cluster: "ap4",
+  encrypted:true,
+  //authEndpoint:"/broadcasting/auth",
+  //'useTLS' : true,
+
+  authEndpoint:"/api/broadcasting/auth",
+  //csrfToken : token.content,
+  auth:{
+      headers:{
+
+    Authorization:JSON.parse(localStorage.getItem('userToken'))
+      }
+  }
+
+  /*authorizer: (channel, options) => {
+    return {
+        authorize: (socketId, callback) => {
+            axios.post('/api/broadcasting/auth', {
+                socket_id: socketId,
+                channel_name: channel.name
+            })
+            .then(response => {
+                callback(false, response.data);
+            })
+            .catch(error => {
+                callback(true, error);
+            });
+        }
+    };
+},
+*/
+
+});
+

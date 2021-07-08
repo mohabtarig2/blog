@@ -1,43 +1,49 @@
 <template>
+<div>
+<header>
+  <!-- Hacker News header -->
+</header>
 
+<div v-for="(item, $index) in list" :key="$index">
+  <!-- Hacker News item loop -->
+</div>
 
-    <div>
-
- <button type="button" class="close" aria-label="Close" @click="Ttoast">
-  <span aria-hidden="true">&times;</span>
-</button>
-
-
-<div :class="toast">M</div>
-
-        <h1>{{title}}</h1>
-
-        <p>{{Description}}</p>
-        <p>{{id}}</p>
-    </div>
-
+<infinite-loading @infinite="infiniteHandler"></infinite-loading>
+</div>
 
 
 </template>
 <script>
+
+
+
+
 export default {
-     props:{title:String,Description:String,id:Number} ,
-     mounted() {
-            console.log(this.title);
-        },
-        data(){
-            return{
-                toast:'d-none'
-            }
-        },
-        methods:{
-            Ttoast(){
-             this.toast='d-block';
-             alert('confirm');
+  data() {
+    return {
+      page: 1,
+      list: [],
+    };
+  },
+  methods: {
+    infiniteHandler($state,page) {
 
-
-            }
+      axios.get("/api/Ads?page=", {
+        params: {
+          page: this.page,
+        },
+      }).then(({ data }) => {
+        if (data.hits.length) {
+          this.page += 1;
+          this.list.push(...data.hits);
+          $state.loaded();
+        } else {
+          $state.complete();
         }
-
+      });
+    },
+  },
 };
+
+
 </script>

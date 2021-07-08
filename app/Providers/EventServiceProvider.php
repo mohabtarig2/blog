@@ -20,6 +20,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\NewComment' => [
+            'App\Listeners\CommentListener'
+        ],
+
+        'App\Events\AcceptTender' => [
+            'App\Listeners\AcceptTenderListener'
+        ],
         VideoViewr::class => [
             IncraseCount::class,
         ],

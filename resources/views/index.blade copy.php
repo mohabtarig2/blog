@@ -98,18 +98,19 @@
 
 
   <div class="owl-carousel owl-theme owl-loaded mb-5">
-  <div class="owl-stage-outer">
-      <div class="owl-stage">
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-          <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
-      </div>
+    <div class="owl-stage-outer">
+        <div class="owl-stage">
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+            <div class="owl-item"><img class="img-fluid" src=" {{asset('assets/img/header.jpg')}}" alt="Third slide"></div>
+        </div>
+    </div>
   </div>
 
 
@@ -501,4 +502,14 @@ $('.owl-carousel').owlCarousel({
     </script>
 
 
-            @include('includes.footer')
+<script>
+      new Vue({
+        el: "#app",
+        components: {
+          FilePond: vueFilePond.default(FilePondPluginImagePreview),
+        },
+      });
+    </script>
+
+
+

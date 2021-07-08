@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','mobile','expire','age'
+        'name', 'email', 'password','mobile','expire','age','role_id'
     ];
 
     /**
@@ -36,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
             */
 
 
-            protected  $guard  ="admin";
+           // protected  $guard  ="admin";
 
 
 
@@ -45,6 +45,30 @@ class User extends Authenticatable implements MustVerifyEmail
            public function phone(){
                return $this->hasOne('App\Models\Phone','user_id');
            }
+
+           public function company(){
+            return $this->hasOne('App\Models\companies','user_id');
+        }
+
+        public function roles(){
+
+            return $this->hasOne('App\role','id','role_id');
+        }
+
+        public function companyfile(){
+
+            return $this->hasOne('App\CompanyFile','user_id');
+        }
+
+        public function achivementFile(){
+
+            return $this->hasOne('App\achivement','user_id');
+        }
+
+        public function tenders(){
+
+            return $this->hasMany('App\tconsulte','user_id');
+        }
 
 
            ############################  end relations ############################

@@ -46,6 +46,14 @@ return [
             'driver' => 'session',
             'provider' => 'admin',
         ],
+        'consulte' => [
+            'driver' => 'session',
+            'provider' => 'consulte',
+        ],
+        'consr' => [
+            'driver' => 'session',
+            'provider' => 'consr',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -74,10 +82,15 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
-        ],'admin' => [
+           //'model' => App\Models\User::class,
+        ],'consulte' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => App\User::class,
+        ],'consr    ' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
         ]
+
 
         // 'users' => [
         //     'driver' => 'database',

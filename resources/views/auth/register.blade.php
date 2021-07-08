@@ -1,13 +1,38 @@
-@extends('layouts.appnone')
 
-@section('content')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LaravelBnb</title>
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+</head>
+
+<body>
+    <div id="app">
+
+       <register></register>
+
+    </div>
+</body>
+</html>
+<!--extends('layouts.appnone')
+
+section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
 
                 <div class="card">
                     <h1 class="text-center mt-3">
-                  {{ __('SIGN UP TO JOIN') }}
+                  <--!{{ __('SIGN UP TO JOIN') }}
                     </h1>
 
 
@@ -28,7 +53,7 @@
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strongmessage }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -44,13 +69,13 @@
                                     </g>
                                   </svg>
 
-                                <input placeholder="Email "  id="email" type="email" class="focus for-icon form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input placeholder="Email "  id="email" type="email" class="focus for-icon form-control error('email') is-invalid enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                @error('email')
+                                error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{message }}</strong>
                                     </span>
-                                @enderror
+                                enderror
                             </div>
                         </div>
 
@@ -63,13 +88,13 @@
                                   </svg>
 
 
-                                <input placeholder="mobile "  id="mobile" type="number" class="focus for-icon form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile">
+                                <input placeholder="mobile "  id="mobile" type="number" class="focus for-icon form-control error('mobile') is-invalid enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile">
 
-                                @error('mobile')
+                                error('mobile')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong> message }}</strong>
                                     </span>
-                                @enderror
+                                enderror
                             </div>
                         </div>
 
@@ -85,13 +110,13 @@
                                     </g>
                                   </svg>
 
-                                <input  placeholder="PASSWROD " id="password" type="password" class="focus for-icon form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input  placeholder="PASSWROD " id="password" type="password" class="focus for-icon form-control error('password') is-invalid enderror" name="password" required autocomplete="new-password">
 
-                                @error('password')
+                                error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>message </strong>
                                     </span>
-                                @enderror
+                                enderror
                             </div>
                         </div>
 
@@ -161,4 +186,4 @@
         </div>
     </div>
 </div>
-@endsection
+endsection

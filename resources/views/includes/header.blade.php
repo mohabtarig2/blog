@@ -9,7 +9,8 @@
 	<head>
 		<title>@section('title', 'home')</title>
 		<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
@@ -18,6 +19,17 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+        <link
+      rel="stylesheet"
+      href="https://unpkg.com/filepond/dist/filepond.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+    />
+  </head>
+
   <link rel="stylesheet" href="{{URL::asset('assets/css/chocolat.css')}}" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -29,7 +41,7 @@
 
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{csrf_token() }}">
 
 
 
@@ -44,76 +56,81 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::asset('assets/css/file.css')}}" />
 </head>
-<body>
-    <div id="ap">
-        <nav class="navbar navbar-expand-md navbar-light   bg-transparent shadow-sm " >
-
-                <a class="navbar-brand" href="{{ url('/') }}">
-				   <!-- {{ config('app.name', 'Home') }} -->
-                  <h3 class="text-light">AMB DELAER</h3>
+<body style="background: #fff">
 
 
 
-                </a>
-                <button class="navbar-toggler" STYLE="box-shadow: none;border-style: none;
-                border-color:none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="navbar-toggler-icon" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
-                        <image id="icons8_menu_48px" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAAdUlEQVRYCe3WIQ7AIAwFUJjh/sdFsSABR5au4pEgaAItT/1SLAIECBAgQOA/gbq3Hr2PvZbpXFtbZn4yDXcziw/cqLlDgAABAgS+ElhyxXxUFpoKgVsWCsTWigABAgQIHAKy0EESXJCFgsG1I0CAAAECBFIJvO5zDBa02sLSAAAAAElFTkSuQmCC"/>
-                      </svg>
+        <nav class="nav">
+            <div class="container">
+                <div class="logo   ">
+                   AMB <span class="main-color">TENDER</span>
+                </div>
+                <div class="main_list" id="mainListDiv">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#offers">offers</a></li>
+                        <li><a href="#tenders">Tenders</a></li>
+                        <li><a href="#how">How it works</a></li>
+                        <li><a href="#Become-Partner">join us</a></li>
 
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                        <li><a href="{{ route('register') }}"  class="visible-xs">
+                            <span class="btn btn-grad text-light ">register
 
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <li class="nav-item">
-                            <a class="nav-link text-light" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                {{ $properties['native'] }}
-                            </a>
-                        </li>
-                    @endforeach
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link  text-center mb-1 text-light round" href="{{ route('auth.login') }}">{{ __('messages.login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link  text-light round" href="{{ route('register') }}">{{ __('messages.register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link text-light dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                            </span></a></li>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                        <li><a href="{{ route('login') }}" class="visible-xs">
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                            <span class="btn btn-dark">login
+                                <i class="fa fa-sign-in"></i>
+                            </span>
+                            </a></li>
+
                     </ul>
                 </div>
+                <div class="media_button">
+                    <button class="main_media_button" id="mediaButton">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
 
+
+
+                </div>
+
+            </div>
         </nav>
+
+        <section class="home visible-xs" id="home">
+            <div class="text-center header-text">
+            <h2 class="text-uppercase font-weight-bold text-dark" > Build your home easily and quickly </h2>
+                <p class=" text-uppercase text-dark" style="font-size: 12px">Get the best companies to build your project</p>
+                <a href="#tenders" class="btn btn-grad text-light" style="padding:20px 50px;" ><b>GET START </b><i class="fa fa-long-arrow-right pl-4"></i> </a>
+            </div>
+
+
+
+
+        </section>
+
+        <script>
+            var mainListDiv = document.getElementById("mainListDiv"),
+    mediaButton = document.getElementById("mediaButton");
+
+mediaButton.onclick = function () {
+
+    "use strict";
+
+    mainListDiv.classList.toggle("show_list");
+    mediaButton.classList.toggle("active");
+
+};
+            </script>
 
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
-</body>
+
 </html>

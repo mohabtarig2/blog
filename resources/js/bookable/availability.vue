@@ -107,6 +107,7 @@ label {
     font-weight: bolder;
 }
 .is-invalid{
-
+border-color: #b22222;
+background-image: none;
 }
 </style>

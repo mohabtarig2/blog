@@ -43,6 +43,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+
             EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -74,6 +75,9 @@ class Kernel extends HttpKernel
         'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
         'checkAge' => \App\Http\Middleware\checkAge::class,
+        'consulte' => \App\Http\Middleware\consulte::class,
+        'consr' => \App\Http\Middleware\consr::class,
+        'admins' => \App\Http\Middleware\admins::class,
 
     ];
 
